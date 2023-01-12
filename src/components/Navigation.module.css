@@ -1,0 +1,36 @@
+.navigation {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+a {
+  text-decoration: none;
+  color: gray;
+  background-color: red;
+  width: 100%;
+}
+a > div {
+  padding: 5px 0;
+  height: 20px;
+}
+
+.navigation > div {
+  padding: 3px 10px;
+  background-color: yellow;
+  width: 46%;
+  text-align: center;
+}
+
+.navigation > div:hover {
+  background-color: rgb(181, 181, 18);
+}
+.active {
+  background-color: rgb(83, 83, 7);
+}
+
+@media only screen and (max-width: 500px) {
+  .navigation {
+    position: fixed;
+    bottom: 0;
+  }
+}

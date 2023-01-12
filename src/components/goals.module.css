@@ -1,0 +1,141 @@
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3.2%;
+  margin-top: 4.9%;
+}
+.buttonContainer > button {
+  padding: 5px 20px;
+}
+
+.formContainer {
+  width: 60%;
+  margin: auto;
+  background-color: white;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.buttonContainer {
+  margin-top: 25px;
+}
+
+.datePicker {
+  margin: 5% 3%;
+}
+
+.submitButton {
+  margin-bottom: 5%;
+  margin-left: 3%;
+  padding: 5px 20px;
+}
+
+.userInput {
+  position: relative;
+  width: 90%;
+}
+
+.userInput input {
+  width: 100%;
+  padding: 7px 0;
+  font-size: 16px;
+  color: rgb(0, 0, 0);
+  margin: 3% 3%;
+  border: none;
+  border-bottom: 1px solid rgb(0, 0, 0);
+  outline: none;
+  background: transparent;
+  font-size: smaller;
+}
+.userInput label {
+  position: absolute;
+  top: 12px;
+  left: 0;
+  padding: 4px 7px;
+  margin-bottom: 2px;
+  font-size: 16px;
+  color: #000;
+  pointer-events: none;
+  transition: 0.5s;
+}
+.userInput input:focus ~ label {
+  top: -5px;
+  left: 0;
+  color: blue;
+  font-size: 12px;
+}
+
+.userInput input:focus {
+  border-bottom: 2px solid blue;
+}
+.userInput input:valid ~ label {
+  top: -5px;
+  left: 0;
+  color: #000;
+  font-size: 12.5px;
+}
+
+.goalList {
+  list-style: none;
+  margin-bottom: 2%;
+  background-color: greenyellow;
+  border-radius: 16px;
+  padding: 12px;
+  width: 85%;
+  transition: all 0.3s ease;
+}
+.goal {
+  font-size: larger;
+  font-weight: bold;
+}
+
+.description {
+  font-size: smaller;
+}
+
+.duration {
+  font-size: smaller;
+  font-style: italic;
+  width: fit-content;
+  margin-left: 90%;
+  font-weight: 600;
+}
+
+.actionButton {
+  width: 100%;
+  background-color: rgb(151, 230, 34);
+  border-left: none;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  border-right: none;
+  border-bottom: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.actionButton:hover {
+  background-color: rgb(115, 155, 34);
+  color: rgb(207, 207, 207);
+}
+.done {
+  background-color: rgb(116, 237, 116);
+}
+
+@media only screen and (max-width: 500px) {
+  .buttonContainer {
+    margin-top: 20%;
+  }
+  .buttonContainer > button {
+    padding: 10px 25px;
+  }
+
+  .formContainer {
+    width: 80%;
+    margin: auto;
+    background-color: white;
+    border-radius: 6px;
+    margin-top: 10%;
+    position: relative;
+  }
+}

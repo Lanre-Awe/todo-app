@@ -1,0 +1,140 @@
+.main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5%;
+}
+.heading {
+  text-align: center;
+}
+
+.test {
+  width: 40%;
+  background-color: green;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+}
+.buttonContainer > button {
+  padding: 5px 20px;
+}
+.buttonContainerMain {
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+}
+.buttonContainerMain > button {
+  padding: 5px 20px;
+}
+
+.formContainer {
+  width: 60%;
+  margin: auto;
+  background-color: white;
+  border-radius: 6px;
+  height: 120px;
+  margin-bottom: 20px;
+}
+
+.labelContainer {
+  margin: 10px 10px;
+  width: fit-content;
+}
+.labelContainer > label {
+  font-weight: bold;
+}
+.inputContainer {
+  height: 30px;
+}
+.inputContainer > span {
+  font-style: italic;
+  color: rgb(234, 49, 49);
+  margin-left: 20px;
+}
+
+.inputContainer > input {
+  width: 90%;
+  margin-left: 3%;
+  height: 25px;
+  border: 2px solid rgb(106, 104, 104);
+  border-radius: 4px;
+}
+
+.buttonContainer {
+  margin-top: 25px;
+}
+
+.list {
+  list-style: none;
+  background-color: red;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  width: 90%;
+  padding: 15px 0;
+  text-indent: 5px;
+  transition: all 0.5s linear;
+}
+
+.unlist {
+  transform: translateX(-100%);
+}
+.done {
+  text-decoration: line-through;
+}
+
+.task {
+  font-size: larger;
+  font-weight: bold;
+}
+.status {
+  width: fit-content;
+  font-size: smaller;
+  font-style: italic;
+  margin-left: 80%;
+}
+
+.cancel {
+  margin-left: 65%;
+}
+.finished {
+  margin-left: 4%;
+}
+
+.cancel,
+.finished {
+  margin-top: 3%;
+  padding: 5px 7px;
+  border: none;
+  border-radius: 18px;
+  cursor: pointer;
+}
+
+.completed {
+  background-color: rgb(116, 237, 116);
+}
+
+@media only screen and (max-width: 500px) {
+  .test {
+    width: 100%;
+    height: 100vh;
+  }
+  .buttonContainer {
+    margin-top: 20%;
+  }
+  .buttonContainerMain {
+    margin-top: 20px;
+  }
+  .buttonContainer > button {
+    padding: 10px 25px;
+  }
+  .formContainer {
+    width: 80%;
+    margin: auto;
+    background-color: white;
+    border-radius: 6px;
+    margin-top: 10%;
+  }
+}
