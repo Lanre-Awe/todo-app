@@ -1,4 +1,3 @@
-import { ClassNames } from "@emotion/react";
 import { NavLink } from "react-router-dom";
 import classes from "./Navigation.module.css";
 
@@ -6,7 +5,7 @@ const Navigation = () => {
   return (
     <div className={classes.navigation}>
       <div>
-        <NavLink to="/home">
+        <NavLink to="/home" exact={true} activeClassName={classes.active}>
           <div> Home</div>
         </NavLink>
       </div>

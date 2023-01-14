@@ -24,8 +24,8 @@ a > div {
 .navigation > div:hover {
   background-color: rgb(181, 181, 18);
 }
-.active {
-  background-color: rgb(83, 83, 7);
+a.active {
+  color: rgb(83, 83, 7);
 }
 
 @media only screen and (max-width: 500px) {
