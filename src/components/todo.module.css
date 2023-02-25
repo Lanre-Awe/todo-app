@@ -1,25 +1,95 @@
 .main {
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 5%;
+  margin-top: 3%;
 }
 .heading {
-  text-align: center;
+  margin: 0 5%;
+  color: rgb(2, 2, 130);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.heading button {
+  background-color: gray;
+  color: white;
+  border: none;
+  border-radius: 2px;
+  padding: 3px 5px;
+  transition: all ease 0.1s;
+}
+.heading button:hover {
+  background-color: red;
+}
+.heading button > a {
+  color: white;
 }
 
 .test {
   width: 40%;
-  background-color: green;
+  display: inline-block;
+  margin-left: 1%;
+  height: 86.4vh;
+  vertical-align: top;
+  position: relative;
+  border-radius: 12px;
+  background-color: white;
+}
+.listContainer {
+  height: 346px;
+  overflow-y: auto;
 }
 
-.buttonContainer {
-  display: flex;
-  justify-content: center;
+.addbar {
+  position: fixed;
+  bottom: 9%;
+  width: 38%;
+  padding: 0 1%;
+  padding-top: 0.6%;
+  border-top: 1px solid rgba(128, 128, 128, 0.459);
 }
-.buttonContainer > button {
+.addbar input {
+  width: 86%;
+  margin-right: 3%;
+  padding: 1.5% 0;
+  border: none;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+  text-indent: 7px;
+  border: 1px solid rgba(139, 139, 139, 0.452);
+}
+.addbar input:focus {
+  outline: 1px solid rgb(2, 2, 130);
+}
+.addbar button {
+  padding: 1.5% 2%;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  border: none;
+  background-color: rgb(2, 2, 130);
+  color: white;
+}
+.buttonContainer {
+  padding: 0 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 35px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.372);
+}
+.buttonContainer button {
   padding: 5px 20px;
+  border-radius: 4px;
+}
+.firstTask {
+  margin-top: 25%;
+  text-align: center;
+}
+.firstTask button {
+  padding: 2%;
+  border-radius: 5px;
+  border: none;
+  background-color: rgb(2, 2, 130);
+  color: white;
 }
 .buttonContainerMain {
   display: flex;
@@ -28,6 +98,10 @@
 }
 .buttonContainerMain > button {
   padding: 5px 20px;
+  background-color: rgb(2, 2, 130);
+  color: white;
+  border: none;
+  border-radius: 3px;
 }
 
 .formContainer {
@@ -35,7 +109,6 @@
   margin: auto;
   background-color: white;
   border-radius: 6px;
-  height: 120px;
   margin-bottom: 20px;
 }
 
@@ -46,6 +119,7 @@
 .labelContainer > label {
   font-weight: bold;
 }
+
 .inputContainer {
   height: 30px;
 }
@@ -59,35 +133,54 @@
   width: 90%;
   margin-left: 3%;
   height: 25px;
-  border: 2px solid rgb(106, 104, 104);
+  border: none;
+  border-bottom: 2px solid rgb(106, 104, 104);
   border-radius: 4px;
+}
+.inputContainer > input:focus {
+  outline: none;
+  border-bottom: 2px solid blue;
 }
 
 .buttonContainer {
   margin-top: 25px;
 }
+.buttonContainer button {
+  background-color: rgb(2, 2, 130);
+  color: white;
+  border: none;
+}
 
 .list {
   list-style: none;
-  background-color: red;
   border-radius: 4px;
+  border: 1px solid rgba(128, 128, 128, 0.301);
   margin-bottom: 10px;
   width: 90%;
-  padding: 15px 0;
-  text-indent: 5px;
+  padding: 1% 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   transition: all 0.5s linear;
+}
+.list:hover {
+  border: 1px solid rgb(2, 2, 130);
+  cursor: pointer;
 }
 
 .unlist {
   transform: translateX(-100%);
 }
 .done {
+  background-color: rgba(1, 1, 164, 0.653);
+}
+.done + .task {
   text-decoration: line-through;
+  color: rgba(0, 0, 0, 0.484);
 }
 
 .task {
-  font-size: larger;
-  font-weight: bold;
+  font-weight: 400;
 }
 .status {
   width: fit-content;
@@ -95,9 +188,15 @@
   font-style: italic;
   margin-left: 80%;
 }
-
+.show {
+  opacity: 1;
+  border: none;
+  padding: 2%;
+  border-radius: 50%;
+  cursor: pointer;
+}
 .cancel {
-  margin-left: 65%;
+  opacity: 0;
 }
 .finished {
   margin-left: 4%;
@@ -105,21 +204,29 @@
 
 .cancel,
 .finished {
-  margin-top: 3%;
-  padding: 5px 7px;
-  border: none;
-  border-radius: 18px;
+  padding: 2%;
+  border: 1px solid rgba(128, 128, 128, 0.45);
+  border-radius: 50%;
   cursor: pointer;
 }
 
 .completed {
-  background-color: rgb(116, 237, 116);
+  background-color: rgba(128, 128, 128, 0.438);
+}
+.burgerContainer,
+.title,
+.titleContainer {
+  display: none;
 }
 
 @media only screen and (max-width: 500px) {
   .test {
     width: 100%;
     height: 100vh;
+    border-radius: 0;
+  }
+  .main {
+    margin-top: 0%;
   }
   .buttonContainer {
     margin-top: 20%;
@@ -127,8 +234,12 @@
   .buttonContainerMain {
     margin-top: 20px;
   }
+  .description {
+    display: none;
+  }
   .buttonContainer > button {
-    padding: 10px 25px;
+    padding: 7px 25px;
+    margin-bottom: 2%;
   }
   .formContainer {
     width: 80%;
@@ -136,5 +247,87 @@
     background-color: white;
     border-radius: 6px;
     margin-top: 10%;
+  }
+  .heading {
+    margin-top: 30%;
+  }
+
+  .addbar {
+    bottom: 1%;
+    width: 100%;
+    padding: 1% 1%;
+  }
+  .addbar input {
+    width: 78%;
+    margin-right: 3%;
+    padding: 3% 0;
+  }
+
+  .addbar button {
+    padding: 3% 4%;
+  }
+  .heading button {
+    background-color: red;
+  }
+  .firstTask {
+    margin-top: 50%;
+  }
+  .listContainer {
+    height: 450px;
+  }
+  .list {
+    padding: 3% 0;
+    margin-bottom: 20px;
+  }
+  .description {
+    display: flex;
+    width: 90%;
+    justify-content: space-around;
+    font-style: italic;
+    margin-bottom: 3%;
+  }
+  .description span {
+    flex-grow: 1;
+    text-align: center;
+  }
+  .burgerContainer {
+    margin-left: 3%;
+    display: inline-block;
+    margin-top: 6%;
+  }
+  .burgerTop {
+    background-color: rgb(2, 2, 130);
+    width: 40px;
+    height: 3px;
+    margin-bottom: 20%;
+  }
+  .burgerMid {
+    background-color: rgb(2, 2, 130);
+    margin-bottom: 20%;
+    margin-left: 20%;
+    width: 40px;
+    height: 3px;
+  }
+  .burgerBottom {
+    background-color: rgb(2, 2, 130);
+    margin-bottom: 20%;
+
+    width: 40px;
+    height: 3px;
+  }
+  .title {
+    margin-top: 5%;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 20%;
+    font-size: 21px;
+    text-align: center;
+    font-family: cursive;
+    font-weight: bold;
+    color: rgb(2, 2, 130);
+  }
+  .titleContainer {
+    border-bottom: 1px solid rgba(2, 2, 130, 0.425);
+    display: block;
   }
 }

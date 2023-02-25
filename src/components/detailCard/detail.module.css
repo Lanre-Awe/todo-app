@@ -1,0 +1,46 @@
+.container {
+  display: inline-block;
+  width: 35%;
+  vertical-align: top;
+  margin-left: 1%;
+  height: 86vh;
+}
+.description {
+  height: 21.4vh;
+  background-color: white;
+  border-radius: 12px;
+  margin-bottom: 2%;
+  padding: 5% 3% 0% 3%;
+}
+
+.description span {
+  color: rgb(2, 2, 130);
+  font-weight: bold;
+  font-size: 22px;
+}
+.displayHolder {
+  text-align: center;
+  font-size: large;
+  font-style: italic;
+  font-weight: bold;
+  color: rgba(128, 128, 128, 0.792);
+  margin-top: 3%;
+}
+
+.displayDesc {
+  text-align: center;
+  font-size: large;
+  font-weight: bold;
+  margin-top: 3%;
+}
+.dashboard {
+  border-radius: 12px;
+  background-color: white;
+  height: 360px;
+}
+
+@media screen and (max-width: 500px) {
+  .container {
+    display: none;
+  }
+}

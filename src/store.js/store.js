@@ -1,14 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
-import goalLegendSlice from "./goalLegendSlice";
-import goalRecordSlice from "./goalsRecordSlice";
+import categorySlice from "./categorySlice";
+import categoryTask from "./categoryTask";
+import descriptionSlice from "./descriptionSlice";
+import sideSlice from "./sideSlice";
 import todoLegendSlice from "./todoLegendSlice";
 import todoSlice from "./todoRecordSlice";
 
 export const store = configureStore({
   reducer: {
     todo: todoSlice.reducer,
-    goal: goalRecordSlice.reducer,
     todoLegend: todoLegendSlice.reducer,
-    goalLegend: goalLegendSlice.reducer,
+    categories: categorySlice.reducer,
+    tasks: categoryTask.reducer,
+    description: descriptionSlice.reducer,
+    side: sideSlice.reducer,
   },
 });

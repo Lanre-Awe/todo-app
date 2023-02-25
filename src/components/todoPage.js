@@ -1,80 +1,167 @@
 import classes from "./todo.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import TodoForm from "./todoForm";
 import TodoList from "./todoList";
 import { todoActions } from "../store.js/todoRecordSlice";
 import { todoLegendAction } from "../store.js/todoLegendSlice";
+import Modal from "./UI/Modal";
+import { categoryAction } from "../store.js/categorySlice";
+import { taskAction } from "../store.js/categoryTask";
+import { Link } from "react-router-dom";
 
 const TodoPage = () => {
   const dispatch = useDispatch();
   const finished = useSelector((state) => state.todo.todoRecord[1].total);
-  const discarded = useSelector((state) => state.todo.todoRecord[2].total);
   const pending = useSelector((state) => state.todo.todoRecord[0].total);
   const history = useSelector((state) => state.todoLegend.history);
-  const getData = () => {
-    const data = localStorage.getItem("MY_TODO");
-    if (data !== null) {
-      return JSON.parse(data);
-    } else {
-      return [];
-    }
-  };
+  const categoryList = useSelector((state) => state.categories.categories);
+  const category = useSelector((state) => state.tasks.categoryTask);
+  const todoTotal = useSelector((state) => state.todo.total);
+
+  const inputRef = useRef();
 
   const [isAdding, setIsAdding] = useState(false);
-  const [tasks, setTasks] = useState(getData());
 
   const showFormHandler = () => {
     setIsAdding(true);
   };
+  const closeForm = () => {
+    setIsAdding(false);
+  };
   const recieveTask = (task) => {
     setIsAdding(false);
-    setTasks((prevState) => [task, ...prevState]);
+    dispatch(
+      categoryAction.onAddTask({ category: category.category, tasks: task })
+    );
+    dispatch(taskAction.onAddTask(task));
     dispatch(todoActions.addPending());
   };
+  const addingTask = () => {
+    const enteredText = inputRef.current.value;
+    if (enteredText.trim().length < 1) {
+      return;
+    }
+    const task = {
+      id: Math.random(),
+      task: enteredText,
+      description: "",
+      isCompleted: false,
+    };
+    dispatch(
+      categoryAction.onAddTask({
+        category: category.category,
+        tasks: task,
+      })
+    );
+    dispatch(taskAction.onAddTask(task));
+    dispatch(todoActions.addPending());
+    inputRef.current.value = "";
+  };
   const filteredTask = (filter, task) => {
-    setTasks(filter);
-    dispatch(todoActions.onDiscard());
-    dispatch(todoLegendAction.onAddHistory({ category: "discarded", task }));
+    dispatch(
+      categoryAction.onFiltered({ category: category.category, tasks: filter })
+    );
+    dispatch(taskAction.onfilter(filter));
+    dispatch(
+      todoLegendAction.onAddHistory({
+        list: category.category,
+        category: "completed",
+        task,
+      })
+    );
   };
   const remainingTask = (filter) => {
-    setTasks(filter.filtered);
+    dispatch(
+      categoryAction.onFiltered({
+        category: category.category,
+        tasks: filter.filtered,
+      })
+    );
+    dispatch(taskAction.onfilter(filter.filtered));
     dispatch(todoActions.onCompleted());
     dispatch(
       todoLegendAction.onAddHistory({
+        list: category.category,
         category: "completed",
         task: filter.task,
       })
     );
   };
+  const removeHandler = (activeCategory) => {
+    if (category.tasks.length > 0) {
+      console.log("me");
+      dispatch(
+        categoryAction.onFiltered({ category: category.category, tasks: [] })
+      );
+      dispatch(taskAction.onfilter([]));
+      dispatch(todoActions.onDiscard());
+    } else {
+      const remainingCategories = categoryList.filter(
+        (item) => item.category !== activeCategory
+      );
+      dispatch(categoryAction.onfilterCategory(remainingCategories));
+    }
+  };
   useEffect(() => {
-    localStorage.setItem("MY_TODO", JSON.stringify(tasks));
-  }, [tasks]);
-
+    localStorage.setItem("CATEGORY", JSON.stringify(categoryList));
+    console.log(category);
+  }, [categoryList]);
+  useEffect(() => {
+    localStorage.setItem("ONSHOWCATEGORY", JSON.stringify(category));
+  }, [category]);
   useEffect(() => {
     localStorage.setItem(
       "TODORECORD",
-      JSON.stringify({ pending, finished, discarded, history })
+      JSON.stringify({ pending, finished, history, todoTotal })
     );
-  }, [pending, finished, discarded, history]);
+  }, [pending, finished, history, todoTotal]);
   return (
     <>
-      {!isAdding && (
+      {isAdding && (
+        <Modal onClose={closeForm}>
+          <TodoForm onAdd={recieveTask} />
+        </Modal>
+      )}
+      <div className={classes.heading}>
+        <h2>{category.category}</h2>
+        <button
+          onClick={() => {
+            removeHandler(category.category);
+          }}
+        >
+          {category.tasks.length > 0 ? (
+            "clear all"
+          ) : (
+            <Link to="/home">remove category</Link>
+          )}
+        </button>
+      </div>
+      {!isAdding && category.tasks.length > 0 && (
         <div className={classes.buttonContainer}>
+          <h3>Tasks</h3>
           <button onClick={showFormHandler}>New Task</button>
         </div>
       )}
-      {isAdding && (
-        <div>
-          <TodoForm onAdd={recieveTask} />
+      {!isAdding && category.tasks.length < 1 && (
+        <div className={classes.firstTask}>
+          <h2>Add Your First Task</h2>
+          <button onClick={showFormHandler}>New Task</button>
         </div>
       )}
-      <div>
-        <TodoList
-          todolist={tasks}
-          onDelete={filteredTask}
-          onDone={remainingTask}
-        />
+
+      {category.tasks.length > 0 && (
+        <div>
+          <TodoList
+            todolist={category.tasks}
+            onDelete={filteredTask}
+            onDone={remainingTask}
+          />
+        </div>
+      )}
+      <div className={classes.addbar}>
+        <input type="text" ref={inputRef} placeholder="add task quickly" />{" "}
+        <button onClick={addingTask}>add</button>
       </div>
     </>
   );

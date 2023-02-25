@@ -1,0 +1,128 @@
+.headingContainer {
+  padding: 0 2%;
+}
+
+.burgerContainer {
+  display: none;
+}
+.nameContainer {
+  display: flex;
+  align-items: center;
+  margin-top: 28%;
+}
+.nameContainer span {
+  font-size: 40px;
+  margin-bottom: 5px;
+}
+.nameContainer input {
+  margin-left: 1%;
+  border: none;
+  background-color: inherit;
+  cursor: pointer;
+  height: 42px;
+  width: 55%;
+  font-size: 40px;
+  outline: none;
+}
+.nameContainer button {
+  background-color: rgb(2, 2, 130);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-left: 3%;
+}
+.nameContainer input::-webkit-input-placeholder {
+  font-size: large;
+}
+
+.latest {
+  margin-top: 8%;
+}
+.latestHeader {
+  font-size: larger;
+  font-weight: 600;
+  color: rgb(2, 2, 130);
+  border-bottom: 1px solid rgba(128, 128, 128, 0.479);
+}
+.latestTask {
+  height: 200px;
+  overflow-y: auto;
+}
+
+.taskContainer {
+  background-color: rgba(128, 128, 128, 0.349);
+  padding: 2%;
+  margin-top: 3%;
+  border-radius: 5px;
+}
+.taskContainer > a {
+  color: black;
+}
+.category {
+  font-variant: small-caps;
+  color: rgb(2, 2, 130);
+}
+.task {
+  font-style: italic;
+}
+.title {
+  display: block;
+  text-align: center;
+  font-family: cursive;
+  font-size: larger;
+  font-weight: bold;
+  color: rgb(2, 2, 130);
+}
+.newCategory {
+  text-align: center;
+  margin-top: 10%;
+}
+.newCategory > div {
+  font-size: larger;
+  font-variant: small-caps;
+}
+.newCategory button {
+  margin-top: 2%;
+  padding: 5px 20px;
+  background-color: rgb(2, 2, 130);
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+.footer {
+  display: none;
+}
+
+@media screen and (max-width: 500px) {
+  .title {
+    display: none;
+  }
+  .nameContainer {
+    margin-top: 50%;
+  }
+  .taskContainer {
+    padding: 4% 2%;
+  }
+  .latest {
+    margin-top: 20%;
+  }
+  .latestTask {
+    height: 350px;
+  }
+  .nameContainer input {
+    width: 60%;
+  }
+  .footer {
+    position: fixed;
+    display: block;
+    bottom: 2%;
+    width: 100%;
+    text-align: center;
+    color: rgb(2, 2, 130);
+    font-variant: small-caps;
+  }
+  .newCategory {
+    margin-top: 20%;
+  }
+}

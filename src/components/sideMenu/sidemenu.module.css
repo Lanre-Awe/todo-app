@@ -1,0 +1,74 @@
+.container {
+  background-color: white;
+  height: 80vh;
+  margin-bottom: 3%;
+  width: 20%;
+  display: inline-block;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  padding-top: 3%;
+  transition: all ease 0.2s;
+}
+
+.container > div {
+  padding: 5%;
+  padding-left: 10%;
+}
+.active {
+  color: blue;
+}
+.heading {
+  font-size: large;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+.heading > a,
+.heading > a:visited {
+  background-color: inherit;
+  color: black;
+}
+
+.list {
+  margin-top: 3%;
+}
+.list input {
+  border: none;
+  border-bottom: 1.5px solid black;
+}
+.list button {
+  border-radius: 50%;
+  margin-left: 2%;
+  font-weight: bold;
+  color: white;
+  background-color: rgb(2, 2, 130);
+}
+.list button:hover {
+  background-color: rgb(5, 5, 202);
+  cursor: pointer;
+}
+.list input:focus {
+  border-bottom: 1.5px solid blue;
+  outline: none;
+}
+.listContainer > a {
+  font-variant: small-caps;
+}
+.listContainer > a > div {
+  padding: 4% 15%;
+  transition: all ease 0.5s;
+
+  /* background-color: red; */
+}
+
+.listContainer > a > div:hover {
+  background-color: rgba(128, 128, 128, 0.237);
+  cursor: pointer;
+}
+
+@media screen and (max-width: 500px) {
+  .container {
+    display: none;
+  }
+}

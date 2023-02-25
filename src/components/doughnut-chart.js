@@ -13,7 +13,7 @@ const DoughnutChart = (props) => {
           legend: {
             display: true,
             labels: {
-              color: "#fff",
+              color: "rgb(2,2,130)",
               padding: 8,
               usePointStyle: true,
             },
@@ -23,10 +23,10 @@ const DoughnutChart = (props) => {
         },
         layout: {
           padding: {
-            left: 20,
-            right: 50,
-            top: 2,
-            bottom: 2,
+            left: 5,
+            right: 10,
+            top: 1,
+            bottom: 1,
           },
         },
       }}

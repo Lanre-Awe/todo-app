@@ -1,0 +1,123 @@
+.categoryContainer {
+  position: fixed;
+  top: 0%;
+  width: 73%;
+  height: 100vh;
+  z-index: 10000;
+  background-color: white;
+  animation: open 0.5s;
+  padding: 5%;
+}
+.container > div {
+  padding: 5%;
+  padding-left: 10%;
+}
+.active {
+  color: blue;
+}
+.head {
+  font-size: 21px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.heading > a,
+.heading > a:visited {
+  background-color: inherit;
+  color: black;
+}
+.heading > span {
+  font-size: 21px;
+  font-family: cursive;
+  font-weight: bold;
+  color: rgb(2, 2, 130);
+}
+
+.list {
+  margin-top: 3%;
+}
+.list input {
+  border: none;
+  border-bottom: 1.5px solid black;
+  width: 70%;
+  margin-right: 10%;
+}
+.list button {
+  border-radius: 50%;
+  margin-left: 2%;
+  font-weight: bold;
+  border: none;
+  padding: 3% 5%;
+  color: white;
+  background-color: rgb(2, 2, 130);
+}
+.list button:hover {
+  background-color: rgb(5, 5, 202);
+  cursor: pointer;
+}
+.list input:focus {
+  border-bottom: 1.5px solid blue;
+  outline: none;
+}
+.listContainer > a {
+  font-size: 21px;
+  font-variant: small-caps;
+}
+.list form {
+  margin-top: 10%;
+}
+.listContainer > a > div {
+  padding: 7% 15%;
+  transition: all ease 0.5s;
+}
+
+.listContainer > a > div:hover {
+  background-color: rgba(128, 128, 128, 0.237);
+  cursor: pointer;
+}
+.itemContainer {
+  margin: 5% 0;
+  font-size: larger;
+  font-weight: bold;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.518);
+  padding: 3% 0;
+}
+.itemContainer a,
+.itemContainer a:visited,
+.itemContainer a:active {
+  text-decoration: none;
+  color: black;
+}
+.heading {
+  color: black;
+  display: flex;
+  justify-content: space-between;
+  padding: 4%;
+  font-weight: bolder;
+  font-size: 22px;
+  align-items: center;
+}
+.buttonContainer {
+  border: none;
+  background-color: white;
+}
+.icons {
+  width: 28px;
+  height: 30px;
+  fill: #000;
+}
+.footer {
+  position: fixed;
+  bottom: 2%;
+  left: 25%;
+  font-variant: small-caps;
+}
+@keyframes open {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}

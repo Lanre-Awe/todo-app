@@ -1,61 +1,94 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import classes from "./todo.module.css";
+import close from "./close.png";
+import { useDispatch, useSelector } from "react-redux";
+import { descriptionAction } from "../store.js/descriptionSlice";
 
 const TodoList = (props) => {
   const [completed, setCompleted] = useState(false);
+  const [listIndex, setListIndex] = useState();
+  const [completedList, setCompletedList] = useState();
   const [filtered, setFiltered] = useState([]);
-  const [isCompleted, setIsCompleted] = useState(false);
-  const deleteHandler = (id, event) => {
-    const listItem = event.target.parentElement.classList;
-    listItem.add(`${classes.unlist}`);
+  const description = useSelector((state) => state.description.description);
+
+  const dispatch = useDispatch();
+  const deleteHandler = (id) => {
     const task = props.todolist.find((item) => item.id === id);
     const filteredTask = props.todolist.filter((item) => item.id !== id);
     props.onDelete(filteredTask, task);
   };
 
-  const finishedHandler = (id, event) => {
-    const listItem = event.target.parentElement.firstChild.classList;
-    listItem.add(`${classes.done}`);
-    const todo = event.target.parentElement.classList;
-    todo.add(`${classes.completed}`);
+  const finishedHandler = (id) => {
+    setCompletedList(id);
     const task = props.todolist.find((item) => item.id === id);
     const filteredTask = props.todolist.filter((item) => item.id !== id);
     setFiltered({ filtered: filteredTask, task: task });
     setCompleted(true);
   };
+
+  const showDescription = (desc, index) => {
+    dispatch(descriptionAction.onDisplay(desc));
+    setListIndex(index);
+  };
+  const closeDescription = () => {
+    dispatch(descriptionAction.onDisplay(null));
+    setListIndex("");
+  };
   useEffect(() => {
     if (completed) {
-      setIsCompleted(true);
       setTimeout(() => {
         props.onDone(filtered);
-        setIsCompleted(false);
-      }, 2000);
+      }, 1000);
     }
-
     setCompleted(false);
   }, [completed]);
   return (
-    <ul>
-      {props.todolist.map((item) => {
+    <ul className={classes.listContainer}>
+      {props.todolist.map((item, index) => {
         return (
-          <li key={item.id} className={classes.list}>
-            <div className={classes.task}>{item.task}</div>
-            <div className={classes.status}>
-              {isCompleted ? "completed" : "pending"}
-            </div>
-            <button
-              className={classes.cancel}
-              onClick={deleteHandler.bind(this, item.id)}
+          <Fragment key={item.id}>
+            <li
+              className={
+                completedList === item.id
+                  ? `${classes.list} ${classes.completed}`
+                  : classes.list
+              }
+              onMouseOver={() => showDescription(item.description)}
+              onMouseLeave={closeDescription}
             >
-              Clear
-            </button>
-            <button
-              className={classes.finished}
-              onClick={finishedHandler.bind(this, item.id)}
-            >
-              done
-            </button>
-          </li>
+              <button
+                className={
+                  completedList === item.id
+                    ? `${classes.finished} ${classes.done}`
+                    : classes.finished
+                }
+                onClick={() => finishedHandler(item.id)}
+              ></button>
+              <div
+                className={classes.task}
+                onClick={() => showDescription(item.description, item.id)}
+              >
+                {item.task}
+              </div>
+              <img
+                src={close}
+                className={
+                  completedList === item.id ? classes.show : classes.cancel
+                }
+                onClick={deleteHandler.bind(this, item.id)}
+              />
+            </li>
+            {listIndex === item.id && (
+              <div className={classes.description}>
+                <span> {description ? description : "No description"}</span>
+                <img
+                  src={close}
+                  className={classes.close}
+                  onClick={closeDescription}
+                />
+              </div>
+            )}
+          </Fragment>
         );
       })}
     </ul>
