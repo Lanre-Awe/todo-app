@@ -8,7 +8,9 @@ import { todoLegendAction } from "../store.js/todoLegendSlice";
 import Modal from "./UI/Modal";
 import { categoryAction } from "../store.js/categorySlice";
 import { taskAction } from "../store.js/categoryTask";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import NotFound from "../pages/NotFound";
+import LoadingSpinner from "./UI/LoadingSpinner";
 
 const TodoPage = () => {
   const dispatch = useDispatch();
@@ -20,8 +22,11 @@ const TodoPage = () => {
   const todoTotal = useSelector((state) => state.todo.total);
 
   const inputRef = useRef();
+  const params = useParams();
 
   const [isAdding, setIsAdding] = useState(false);
+  const [availableCategory, setAvailableCategory] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const showFormHandler = () => {
     setIsAdding(true);
@@ -90,7 +95,6 @@ const TodoPage = () => {
   };
   const removeHandler = (activeCategory) => {
     if (category.tasks.length > 0) {
-      console.log("me");
       dispatch(
         categoryAction.onFiltered({ category: category.category, tasks: [] })
       );
@@ -105,11 +109,15 @@ const TodoPage = () => {
   };
   useEffect(() => {
     localStorage.setItem("CATEGORY", JSON.stringify(categoryList));
-    console.log(category);
   }, [categoryList]);
   useEffect(() => {
+    const isCategory = categoryList.find(
+      (item) => item.category === params.todo
+    );
+    setAvailableCategory(isCategory);
+    setLoading(false);
     localStorage.setItem("ONSHOWCATEGORY", JSON.stringify(category));
-  }, [category]);
+  }, [category, params.todo]);
   useEffect(() => {
     localStorage.setItem(
       "TODORECORD",
@@ -118,51 +126,57 @@ const TodoPage = () => {
   }, [pending, finished, history, todoTotal]);
   return (
     <>
-      {isAdding && (
-        <Modal onClose={closeForm}>
-          <TodoForm onAdd={recieveTask} />
-        </Modal>
-      )}
-      <div className={classes.heading}>
-        <h2>{category.category}</h2>
-        <button
-          onClick={() => {
-            removeHandler(category.category);
-          }}
-        >
-          {category.tasks.length > 0 ? (
-            "clear all"
-          ) : (
-            <Link to="/home">remove category</Link>
-          )}
-        </button>
-      </div>
-      {!isAdding && category.tasks.length > 0 && (
-        <div className={classes.buttonContainer}>
-          <h3>Tasks</h3>
-          <button onClick={showFormHandler}>New Task</button>
-        </div>
-      )}
-      {!isAdding && category.tasks.length < 1 && (
-        <div className={classes.firstTask}>
-          <h2>Add Your First Task</h2>
-          <button onClick={showFormHandler}>New Task</button>
-        </div>
-      )}
-
-      {category.tasks.length > 0 && (
+      {loading && <LoadingSpinner />}
+      {availableCategory && !loading && (
         <div>
-          <TodoList
-            todolist={category.tasks}
-            onDelete={filteredTask}
-            onDone={remainingTask}
-          />
+          {isAdding && (
+            <Modal onClose={closeForm}>
+              <TodoForm onAdd={recieveTask} />
+            </Modal>
+          )}
+          <div className={classes.heading}>
+            <h2>{category.category}</h2>
+            <button
+              onClick={() => {
+                removeHandler(category.category);
+              }}
+            >
+              {category.tasks.length > 0 ? (
+                "clear all"
+              ) : (
+                <Link to="/home">remove category</Link>
+              )}
+            </button>
+          </div>
+          {!isAdding && category.tasks.length > 0 && (
+            <div className={classes.buttonContainer}>
+              <h3>Tasks</h3>
+              <button onClick={showFormHandler}>New Task</button>
+            </div>
+          )}
+          {!isAdding && category.tasks.length < 1 && (
+            <div className={classes.firstTask}>
+              <h2>Add Your First Task</h2>
+              <button onClick={showFormHandler}>New Task</button>
+            </div>
+          )}
+
+          {category.tasks.length > 0 && (
+            <div>
+              <TodoList
+                todolist={category.tasks}
+                onDelete={filteredTask}
+                onDone={remainingTask}
+              />
+            </div>
+          )}
+          <div className={classes.addbar}>
+            <input type="text" ref={inputRef} placeholder="add task quickly" />{" "}
+            <button onClick={addingTask}>add</button>
+          </div>
         </div>
       )}
-      <div className={classes.addbar}>
-        <input type="text" ref={inputRef} placeholder="add task quickly" />{" "}
-        <button onClick={addingTask}>add</button>
-      </div>
+      {!availableCategory && !loading && <NotFound />}
     </>
   );
 };

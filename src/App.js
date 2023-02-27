@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Route, Redirect, Switch } from "react-router-dom";
+import { Route, Redirect, Switch, useParams } from "react-router-dom";
 import Detail from "./components/detailCard/Detail";
 import FrontPage from "./components/Frontpage";
 import PhoneMenu from "./components/phoneMenu/PhoneMenu";
@@ -8,7 +8,6 @@ import SideMenu from "./components/sideMenu/SideMenu";
 import classes from "./components/todo.module.css";
 import TodoPage from "./components/todoPage";
 import LoadingSpinner from "./components/UI/LoadingSpinner";
-import NotFound from "./pages/NotFound";
 import { sideAction } from "./store.js/sideSlice";
 
 function App() {

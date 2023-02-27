@@ -218,6 +218,30 @@
 .titleContainer {
   display: none;
 }
+.notFoundContainer {
+  width: 60%;
+  margin: 30% auto;
+  text-align: center;
+}
+.notFoundContainer span {
+  font-size: larger;
+  font-weight: bold;
+}
+.notFoundContainer button {
+  background-color: rgb(2, 2, 130);
+  border: none;
+  padding: 2% 5%;
+  border-radius: 5px;
+  color: white;
+}
+.icons {
+  width: 28px;
+  height: 30px;
+  fill: #000;
+}
+.notFoundContainer button:hover {
+  background-color: rgb(0, 0, 173);
+}
 
 @media only screen and (max-width: 500px) {
   .test {

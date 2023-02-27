@@ -5,7 +5,6 @@ import classes from "./detail.module.css";
 
 const Detail = () => {
   const [desc, setDesc] = useState();
-  const [display, setDisplay] = useState(false);
   const description = useSelector((state) => state.description.description);
   useEffect(() => {
     if (description === null) {
